@@ -6,11 +6,13 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { UserService } from './user.service';
 import { UserformComponent } from './userform/userform.component';
+import { CustomPipe } from './custom.pipe';
 //decorator
 @NgModule({
   declarations: [
     AppComponent,
-    UserformComponent
+    UserformComponent,
+    CustomPipe
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule
