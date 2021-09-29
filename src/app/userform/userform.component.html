@@ -11,7 +11,7 @@
 
 <ol>
     <li *ngFor='let user of users'>
-        {{user.firstName}}, {{user.age}}, {{user.gender}}
+        {{user.firstName | lowercase|uppercase}}, {{user.age | currency: 'AD'}}, {{user.gender}}
         <button>Delete</button>
     </li>
 </ol>
