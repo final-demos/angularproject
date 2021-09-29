@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({//decorator
   selector: 'app-userform',
@@ -7,17 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserformComponent implements OnInit {
   user = { //state
-    firstName: "Pariwesh", age:10, gender:"Male"
+    firstName: "Pariwesh", age: 10, gender: "Male"
   }
   users = [{ //state
-    firstName: "Ram", age:10, gender:"Male"
+    firstName: "Ram", age: 10, gender: "Male"
   }];
   save() {
-    console.log('worked');
-    console.log(this.user.firstName);
-    this.users.push(this.user);
+    const observable = this.service.createUser(this.user);
+    observable.subscribe((response) => { //success handle, 200-399
+      this.users.push(this.user);
+    },
+      error => {
+        alert(error.message);
+      })
   }
-  constructor() { }
+  constructor(private service: UserService) { }
 
   ngOnInit(): void {
   }
