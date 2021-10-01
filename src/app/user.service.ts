@@ -6,6 +6,9 @@ const URL = 'http://localhost:3000/users/';
   providedIn: 'root'
 })
 export class UserService {
+  getSkills() {
+    return this.http.get('http://localhost:3000/skills');
+  }
   deleteUser(userid: number) {
     return this.http.delete(URL+userid);
   }

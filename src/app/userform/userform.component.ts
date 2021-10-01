@@ -10,14 +10,14 @@ export class UserformComponent implements OnInit {
   user: any = { //state
     firstName: "Pariwesh", age: 10, gender: "Male", skills: []
   }
-  allSkills = ["Java", 'Javascript','Angular'];
+  allSkills: any = [];
   users: any = [];
   save() {
     if (!this.validate()) {
       return;
     }
     // remove nulls
-    this.user.skills = this.user.skills.filter( (skill: any) => skill);
+    this.user.skills = this.user.skills.filter((skill: any) => skill);
     const observable = this.service.createUser(this.user);
     observable.subscribe((savedUser) => { //success handler, 200-399
       this.users.push(savedUser);
@@ -27,9 +27,9 @@ export class UserformComponent implements OnInit {
         alert(error.message);
       });
   }
-  updateSkill(event:any){
+  updateSkill(event: any) {
     console.log(event.target.name);//['data-index']);
-    this.user.skills[event.target.name]=event.target.value;
+    this.user.skills[event.target.name] = event.target.value;
   }
   constructor(private service: UserService) { }
   deleteUser(userid: number, index: number) {
@@ -41,6 +41,7 @@ export class UserformComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.service.getSkills().subscribe((response: any) => this.allSkills = response);
     const observable = this.service.getUsers();
     observable.subscribe(response => {
       console.log(response);
