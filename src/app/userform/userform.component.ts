@@ -7,14 +7,15 @@ import { UserService } from '../user.service';
   styleUrls: ['./userform.component.css']
 })
 export class UserformComponent implements OnInit {
-  user = { //state
+  user :any= { //state
     firstName: "Pariwesh", age: 10, gender: "Male"
   }
-  users:any = [];
+  users: any = [];
   save() {
     const observable = this.service.createUser(this.user);
-    observable.subscribe((response) => { //success handler, 200-399
-      this.users.push(this.user);
+    observable.subscribe((savedUser) => { //success handler, 200-399
+      this.users.push(savedUser);
+      this.user={};
     },
       error => {//error handler, 400 to 599
         alert(error.message);
@@ -24,13 +25,13 @@ export class UserformComponent implements OnInit {
 
   ngOnInit(): void {
     const observable = this.service.getUsers();
-    observable.subscribe(response =>{
+    observable.subscribe(response => {
       console.log(response);
       this.users = response;
     },
-    error=>{
+      error => {
 
-    })
+      })
   }
 
 }
