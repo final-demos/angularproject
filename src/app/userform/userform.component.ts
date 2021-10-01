@@ -12,6 +12,9 @@ export class UserformComponent implements OnInit {
   }
   users: any = [];
   save() {
+    if (!this.validate()) {
+      return;
+    }
     const observable = this.service.createUser(this.user);
     observable.subscribe((savedUser) => { //success handler, 200-399
       this.users.push(savedUser);
@@ -24,9 +27,9 @@ export class UserformComponent implements OnInit {
   constructor(private service: UserService) { }
   deleteUser(userid: number, index: number) {
     const observable = this.service.deleteUser(userid);
-    observable.subscribe(response => { 
+    observable.subscribe(response => {
       this.users.splice(index, 1)
-     });
+    });
   }
   ngOnInit(): void {
     const observable = this.service.getUsers();
@@ -38,5 +41,14 @@ export class UserformComponent implements OnInit {
 
       })
   }
-
+  validate(): boolean {
+    let outcome: boolean = true;
+    if (!this.user.firstName) {
+      alert('First name is mandatory');
+      outcome = false;
+    }
+    return outcome;
+  }
 }
+
+
