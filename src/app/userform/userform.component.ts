@@ -8,21 +8,27 @@ import { UserService } from '../user.service';
 })
 export class UserformComponent implements OnInit {
   user: any = { //state
-    firstName: "Pariwesh", age: 10, gender: "Male"
+    firstName: "Pariwesh", age: 10, gender: "Male", skills: []
   }
   users: any = [];
   save() {
     if (!this.validate()) {
       return;
     }
+    // remove nulls
+    this.user.skills = this.user.skills.filter( (skill: any) => skill);
     const observable = this.service.createUser(this.user);
     observable.subscribe((savedUser) => { //success handler, 200-399
       this.users.push(savedUser);
-      this.user = {};
+      // this.user = {};
     },
       error => {//error handler, 400 to 599
         alert(error.message);
       });
+  }
+  updateSkill(event:any){
+    console.log(event.target.name);//['data-index']);
+    this.user.skills[event.target.name]=event.target.value;
   }
   constructor(private service: UserService) { }
   deleteUser(userid: number, index: number) {
