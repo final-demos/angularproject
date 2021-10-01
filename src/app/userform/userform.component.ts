@@ -7,7 +7,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./userform.component.css']
 })
 export class UserformComponent implements OnInit {
-  user :any= { //state
+  user: any = { //state
     firstName: "Pariwesh", age: 10, gender: "Male"
   }
   users: any = [];
@@ -15,14 +15,19 @@ export class UserformComponent implements OnInit {
     const observable = this.service.createUser(this.user);
     observable.subscribe((savedUser) => { //success handler, 200-399
       this.users.push(savedUser);
-      this.user={};
+      this.user = {};
     },
       error => {//error handler, 400 to 599
         alert(error.message);
       });
   }
   constructor(private service: UserService) { }
-
+  deleteUser(userid: number, index: number) {
+    const observable = this.service.deleteUser(userid);
+    observable.subscribe(response => { 
+      this.users.splice(index, 1)
+     });
+  }
   ngOnInit(): void {
     const observable = this.service.getUsers();
     observable.subscribe(response => {

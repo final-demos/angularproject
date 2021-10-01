@@ -10,8 +10,8 @@
 <button (click)='save()'>Save</button>
 
 <ol>
-    <li *ngFor='let user of users'>
+    <li *ngFor='let user of users; let i =index'>
         {{user.firstName | lowercase|uppercase| custom}}, {{user.age | currency: 'AD'}}, {{user.gender}}
-        <button>Delete</button>
+        <button (click)='deleteUser(user.id, i)'>Delete</button>
     </li>
 </ol>

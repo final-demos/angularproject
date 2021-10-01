@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 //decorator
-const URL = 'http://localhost:3000/users';
+const URL = 'http://localhost:3000/users/';
 @Injectable({ //@Service
   providedIn: 'root'
 })
 export class UserService {
+  deleteUser(userid: number) {
+    return this.http.delete(URL+userid);
+  }
   constructor(private http: HttpClient) { }
   createUser(user: any) {
     return this.http.post(URL,
