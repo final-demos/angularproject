@@ -26,10 +26,12 @@ export class UserformComponent implements OnInit {
   }
   constructor(private service: UserService) { }
   deleteUser(userid: number, index: number) {
-    const observable = this.service.deleteUser(userid);
-    observable.subscribe(response => {
-      this.users.splice(index, 1)
-    });
+    if (confirm("are you sure?")) {
+      const observable = this.service.deleteUser(userid);
+      observable.subscribe(response => {
+        this.users.splice(index, 1)
+      });
+    }
   }
   ngOnInit(): void {
     const observable = this.service.getUsers();
