@@ -10,6 +10,7 @@ export class UserformComponent implements OnInit {
   user: any = { //state
     firstName: "Pariwesh", age: 10, gender: "Male", skills: []
   }
+  allSkills = ["Java", 'Javascript','Angular'];
   users: any = [];
   save() {
     if (!this.validate()) {

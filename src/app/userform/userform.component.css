@@ -4,3 +4,16 @@ input[type=text] {
     margin: 8px 0;
     box-sizing: border-box;
   }
+  table{
+    width: 100%;
+  }
+  tr:hover {
+    background-color: yellow;
+  
+  }
+  tr:nth-child(even) {background-color: #f2f2f2;}
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }

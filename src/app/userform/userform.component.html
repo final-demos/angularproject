@@ -3,14 +3,27 @@
 <input  [(ngModel)]='user.age' type="text">
 <input type="radio" value="Male" [(ngModel)]='user.gender'>Male
 <input type="radio" value="Female" [(ngModel)]='user.gender'>Female
-<input type="checkbox" value="Java" [(ngModel)]='user.skills[0]' (change)='updateSkill($event)'  name='0'>Java
-<input type="checkbox" value='Angular' [(ngModel)]='user.skills[1]' (change)='updateSkill($event)' name="1">angular
-<input type="checkbox" value='Javascript' [(ngModel)]='user.skills[2]' (change)='updateSkill($event)' name='2'>Javascript
+<span *ngFor='let skill of allSkills; let i = index' >
+    <input type="checkbox" value={{skill}} (change)='updateSkill($event)'  name={{i}}>{{skill}}
+</span>
 <button (click)='save()'>Save</button>
 
-<ol>
-    <li *ngFor='let user of users; let i =index'>
-        {{user.firstName | lowercase|uppercase| custom}}, {{user.age | currency: 'AD'}}, {{user.gender}}
-        <button (click)='deleteUser(user.id, i)'>Delete</button>
-    </li>
-</ol>
+<table>
+    <thead>
+        <th>First Name</th>
+        <th>Age</th>
+        <th>Gender</th> 
+        <th>Skills</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr *ngFor='let user of users; let i =index'>
+            <td>{{user.firstName | lowercase|uppercase| custom}}</td>
+            <td> {{user.age }}</td>
+            <td>{{user.gender}}</td>
+            <td>{{user.skills}}</td>
+            <td><button (click)='deleteUser(user.id, i)'>Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
